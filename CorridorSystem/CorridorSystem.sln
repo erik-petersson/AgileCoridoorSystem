@@ -1,27 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorridorSystem", "CorridorSystem\CorridorSystem.csproj", "{549D3102-2DAD-4FBD-B9B4-F9A5A373C333}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorridorSystem.Tests", "CorridorSystem.Tests\CorridorSystem.Tests.csproj", "{213C9370-05BD-4E7B-8181-434B028EF988}"
-EndProject
 Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{549D3102-2DAD-4FBD-B9B4-F9A5A373C333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{549D3102-2DAD-4FBD-B9B4-F9A5A373C333}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{549D3102-2DAD-4FBD-B9B4-F9A5A373C333}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{549D3102-2DAD-4FBD-B9B4-F9A5A373C333}.Release|Any CPU.Build.0 = Release|Any CPU
-		{213C9370-05BD-4E7B-8181-434B028EF988}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{213C9370-05BD-4E7B-8181-434B028EF988}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{213C9370-05BD-4E7B-8181-434B028EF988}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{213C9370-05BD-4E7B-8181-434B028EF988}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
