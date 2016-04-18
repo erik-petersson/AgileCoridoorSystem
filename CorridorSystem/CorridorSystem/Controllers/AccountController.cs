@@ -333,6 +333,16 @@ namespace CorridorSystem.Controllers
             {
                 return errorResult;
             }
+            else
+            {
+                User newUser = new User();
+                newUser.Id = user.Id;
+                newUser.UserType = 2;
+                newUser.UserName = user.UserName;
+                //newUser.Email = ;
+                //newUser.FirstName = ;
+                //newUser.LastName = ;
+            }
 
             return Ok();
         }
