@@ -336,7 +336,7 @@ namespace CorridorSystem.Controllers
             else
             {
                 User newUser = new User();
-                newUser.Id = user.Id;
+                newUser.Id = Convert.ToInt32(user.Id);
                 newUser.UserType = 2;
                 newUser.UserName = user.UserName;
                 //newUser.Email = ;

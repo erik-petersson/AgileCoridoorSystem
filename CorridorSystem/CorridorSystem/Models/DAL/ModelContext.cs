@@ -15,6 +15,7 @@ namespace CorridorSystem.Models.DAL
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<RemovedUsers> RmUsers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

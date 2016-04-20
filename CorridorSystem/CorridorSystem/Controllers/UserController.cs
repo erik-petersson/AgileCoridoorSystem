@@ -17,16 +17,16 @@ namespace CorridorSystem.Controllers
         // Get a specific user by userId
         // GET: api/User/userId
         [Authorize]
-        [RoutePrefix("api/User/{uId}")]
-        public IHttpActionResult Get(String uId)
+        [Route("api/User/{uId}")]
+        public IHttpActionResult Get(int uId)
         {
             ClaimsIdentity claimsIdentity = (ClaimsIdentity)User.Identity;
             Claim userClaim = claimsIdentity.FindFirst(ClaimTypes.Name);
             string myUsername = userClaim.Value;
             using (var db = new ModelContext())
             {
-                User matchingUser = db.Users.Where(x => x.UserName == uId).FirstOrDefault<User>();
-                if (matchingUser.UserName == uId)
+                User matchingUser = db.Users.Where(x => x.Id == uId).FirstOrDefault<User>();
+                if (matchingUser.Id == uId)
                 {
                     return Ok(matchingUser);
                     //remove me!
@@ -41,8 +41,8 @@ namespace CorridorSystem.Controllers
         //returns all users of that type
         // GET: api/Users/{type}
         [Authorize]
-        [RoutePrefix("api/Users/{uType}")]
-        public IHttpActionResult Get(int uType)
+        [Route("api/Users/{uType}")]
+        public IHttpActionResult Get1(int uType)
         {
             ClaimsIdentity claimsIdentity = (ClaimsIdentity)User.Identity;
             Claim userClaim = claimsIdentity.FindFirst(ClaimTypes.Name);
@@ -62,11 +62,13 @@ namespace CorridorSystem.Controllers
 
         //Update info for one user
         // PUT: api/User/{uId}
-        public IHttpActionResult Put(String uId, [FromBody]string newValues)
+        [Authorize]
+        [Route("api/Users/{uId}")]
+        public IHttpActionResult Put(int uId, [FromBody]string newValues)
         {
             using(var db = new ModelContext())
             {
-                var userToUpdate = db.Users.Where(x => x.UserName == uId).FirstOrDefault<User>();
+                var userToUpdate = db.Users.Where(x => x.Id == uId).FirstOrDefault<User>();
 
                 foreach (var value in newValues.GetType().GetProperties())
                 {
@@ -84,9 +86,32 @@ namespace CorridorSystem.Controllers
             }
         }
 
-        // DELETE: api/User/5
-        public void Delete(int id)
+        // Deactivate a user
+        // DELETE: api/User/{uId}
+        [Authorize]
+        [Route("api/Users/{uId}")]
+        public IHttpActionResult Delete(int uId)
         {
+            using (var db = new ModelContext())
+            {
+                var userToDeactivate = db.Users.Where(x => x.Id == uId).FirstOrDefault<User>();
+                RemovedUsers rmUser = new RemovedUsers();
+
+                foreach (var value in userToDeactivate.GetType().GetProperties()){
+
+                    var newValue = value.GetValue(userToDeactivate, null);
+
+                    rmUser.GetType().GetProperty(value.Name).SetValue(rmUser, newValue.ToString());
+                }
+
+                db.Users.Remove(userToDeactivate);
+                db.RmUsers.AddOrUpdate();
+                db.Users.AddOrUpdate();
+                db.SaveChanges();
+                return Ok();
+                
+            }
+
         }
     }
 }
