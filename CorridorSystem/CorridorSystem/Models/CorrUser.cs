@@ -5,12 +5,18 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Infrastructure;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CorridorSystem.Models
 {
-    public class User
+    public class ApplicationUser : IdentityUser
     {
-        [Required]
+        public virtual CorrUser CorrUser { get; set; }
+        public virtual RemovedUsers RemovedUsers { get; set; }
+    }
+
+    public class CorrUser
+    {
         [Key]
         public int Id { get; set; }
 

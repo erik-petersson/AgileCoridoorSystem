@@ -25,11 +25,10 @@ namespace CorridorSystem.Controllers
             string myUsername = userClaim.Value;
             using (var db = new ModelContext())
             {
-                User matchingUser = db.Users.Where(x => x.Id == uId).FirstOrDefault<User>();
+                CorrUser matchingUser = db.MyUsers.Where(x => x.Id == uId).FirstOrDefault<CorrUser>();
                 if (matchingUser.Id == uId)
                 {
                     return Ok(matchingUser);
-                    //remove me!
                 }
                 else
                 {
@@ -49,7 +48,7 @@ namespace CorridorSystem.Controllers
             string myUsername = userClaim.Value;
             using (var db = new ModelContext())
             {
-                List<User> allUsers = db.Users.Where(x => x.UserType == uType).ToList();
+                List<CorrUser> allUsers = db.MyUsers.Where(x => x.UserType == uType).ToList();
                 return Ok(allUsers);
             }
             
@@ -68,7 +67,7 @@ namespace CorridorSystem.Controllers
         {
             using(var db = new ModelContext())
             {
-                var userToUpdate = db.Users.Where(x => x.Id == uId).FirstOrDefault<User>();
+                var userToUpdate = db.MyUsers.Where(x => x.Id == uId).FirstOrDefault<CorrUser>();
 
                 foreach (var value in newValues.GetType().GetProperties())
                 {
@@ -80,7 +79,7 @@ namespace CorridorSystem.Controllers
                     }
                 }
 
-                db.Users.AddOrUpdate();
+                db.MyUsers.AddOrUpdate();
                 db.SaveChanges();
                 return Ok();
             }
@@ -94,7 +93,7 @@ namespace CorridorSystem.Controllers
         {
             using (var db = new ModelContext())
             {
-                var userToDeactivate = db.Users.Where(x => x.Id == uId).FirstOrDefault<User>();
+                var userToDeactivate = db.MyUsers.Where(x => x.Id == uId).FirstOrDefault<CorrUser>();
                 RemovedUsers rmUser = new RemovedUsers();
 
                 foreach (var value in userToDeactivate.GetType().GetProperties()){
@@ -104,9 +103,9 @@ namespace CorridorSystem.Controllers
                     rmUser.GetType().GetProperty(value.Name).SetValue(rmUser, newValue.ToString());
                 }
 
-                db.Users.Remove(userToDeactivate);
+                db.MyUsers.Remove(userToDeactivate);
                 db.RmUsers.AddOrUpdate();
-                db.Users.AddOrUpdate();
+                db.MyUsers.AddOrUpdate();
                 db.SaveChanges();
                 return Ok();
                 

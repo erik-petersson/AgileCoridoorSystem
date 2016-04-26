@@ -34,12 +34,6 @@ namespace CorridorSystem.Models
 
     public class RegisterBindingModel
     {
-        [Key]
-        public int Id { get; set; }
-
-        [Required]
-        public int UserType { get; set; }
-
         [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
@@ -53,14 +47,7 @@ namespace CorridorSystem.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
         
-        [Required]
-        public string Email { get; set; }
 
-        [Required]
-        public string FirstName { get; set; }
-
-        [Required]
-        public string LastName { get; set; }
     }
 
     public class RegisterExternalBindingModel

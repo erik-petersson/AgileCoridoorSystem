@@ -10,13 +10,12 @@ namespace CorridorSystem.Models.DAL
     {
         protected override void Seed(ModelContext context)
         {
-            var users = new List<User>
+            var users = new List<CorrUser>
             {
-                new User { UserName="viktor", UserType=2, Email="viktor@viktor.com", FirstName="Viktor", LastName="Bjornlund"},
-                new User { UserName="filip", UserType=1, Email="filip@viktor.com", FirstName="Filip", LastName="Olsson"}
+                //new CorrUser { UserName="viktor", UserType=2, Email="viktor@viktor.com", FirstName="Viktor", LastName="Bjornlund"},
+                //new CorrUser { UserName="filip", UserType=1, Email="filip@viktor.com", FirstName="Filip", LastName="Olsson"}
             };
 
-            users.ForEach(s => context.Users.Add(s));
             context.SaveChanges();
         }
     }
