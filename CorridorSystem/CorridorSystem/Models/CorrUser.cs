@@ -5,14 +5,22 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Infrastructure;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CorridorSystem.Models
 {
-    public class User
+    public class ApplicationUser : IdentityUser
     {
-        [Required]
+        public virtual CorrUser CorrUser { get; set; }
+        public virtual RemovedUsers RemovedUsers { get; set; }
+    }
+
+    public class CorrUser
+    {
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
+
+        public string Title { get; set; }
 
         [Required]
         public int UserType { get; set; }
@@ -28,5 +36,6 @@ namespace CorridorSystem.Models
 
         [Required]
         public string LastName { get; set; }
+
     }
 }

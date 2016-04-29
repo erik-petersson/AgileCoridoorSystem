@@ -16,18 +16,22 @@ using Microsoft.Owin.Security.OAuth;
 using CorridorSystem.Models;
 using CorridorSystem.Providers;
 using CorridorSystem.Results;
+using CorridorSystem.Models.DAL;
 
 namespace CorridorSystem.Controllers
 {
+
     [Authorize]
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
+        private AuthRepository _repo = null;
         private const string LocalLoginProvider = "Local";
 
         public AccountController()
             : this(Startup.UserManagerFactory(), Startup.OAuthOptions.AccessTokenFormat)
         {
+            _repo = new AuthRepository();
         }
 
         public AccountController(UserManager<IdentityUser> userManager,
@@ -314,7 +318,7 @@ namespace CorridorSystem.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        public async Task<IHttpActionResult> Register(AccountUser model)
         {
             if (!ModelState.IsValid)
             {
@@ -326,7 +330,7 @@ namespace CorridorSystem.Controllers
                 UserName = model.UserName
             };
 
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+            var result = await _repo.RegisterUser(model);
             IHttpActionResult errorResult = GetErrorResult(result);
 
             if (errorResult != null)
@@ -335,13 +339,20 @@ namespace CorridorSystem.Controllers
             }
             else
             {
-                User newUser = new User();
-                newUser.Id = user.Id;
-                newUser.UserType = 2;
-                newUser.UserName = user.UserName;
-                //newUser.Email = ;
-                //newUser.FirstName = ;
-                //newUser.LastName = ;
+                using (var db = new ModelContext())
+                {
+                    var newUser = new CorrUser();
+                    newUser.UserType = model.UserType;
+                    newUser.UserName = model.UserName;
+                    newUser.FirstName = model.FirstName;
+                    newUser.LastName = model.LastName;
+                    newUser.Title = model.Title;
+                    newUser.Email = model.Email;
+
+                    db.MyUsers.Add(newUser);
+                    db.SaveChanges();
+                }
+                
             }
 
             return Ok();
