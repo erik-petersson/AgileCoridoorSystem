@@ -9,6 +9,7 @@ using System.Web.Http;
 using CorridorSystem.Models;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using Newtonsoft.Json;
 
 namespace CorridorSystem.Controllers
 {
@@ -63,30 +64,38 @@ namespace CorridorSystem.Controllers
         // PUT: api/User/{uId}
         [Authorize]
         [Route("api/Users/{uId}")]
-        public IHttpActionResult Put(int uId, [FromBody]string newValues)
+        public IHttpActionResult Put([FromBody]User newUserValues, int uId)
         {
             using(var db = new ModelContext())
             {
                 var userToUpdate = db.MyUsers.Where(x => x.Id == uId).FirstOrDefault<CorrUser>();
-
-                foreach (var value in newValues.GetType().GetProperties())
+                Dictionary<string, string> u = new Dictionary<string, string>();
+                u.Add("UserName", newUserValues.username);
+                u.Add("FirstName", newUserValues.firstname);
+                u.Add("LastName", newUserValues.lastname);
+                u.Add("Email", newUserValues.email);
+                u.Add("Title", newUserValues.title);
+                foreach (var value in u)
                 {
-                    var newValue = value.GetValue(newValues, null);
-                    var oldValue = userToUpdate.GetType().GetProperty(value.Name).GetValue(userToUpdate, null);
-                    if (value.Name != "id")
+                    if (value.Value != null)
                     {
-                        userToUpdate.GetType().GetProperty(value.Name).SetValue(userToUpdate, newValue.ToString());
+                        var newValue = value.Value;
+                        var oldValue = userToUpdate.GetType().GetProperty(value.Key).GetValue(userToUpdate, null);
+                        if (value.Key != "id")
+                        {
+                            userToUpdate.GetType().GetProperty(value.Key).SetValue(userToUpdate, newValue.ToString());
+                        }
                     }
                 }
 
-                db.MyUsers.AddOrUpdate();
+                db.MyUsers.AddOrUpdate(userToUpdate); 
                 db.SaveChanges();
                 return Ok();
-            }
+            }       
         }
 
         // Deactivate a user
-        // DELETE: api/User/{uId}
+        // DELETE: api/Users/{uId}
         [Authorize]
         [Route("api/Users/{uId}")]
         public IHttpActionResult Delete(int uId)
