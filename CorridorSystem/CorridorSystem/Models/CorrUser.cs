@@ -36,6 +36,9 @@ namespace CorridorSystem.Models
 
         [Required]
         public string LastName { get; set; }
+        [Required]
+        public string signature { get; set; }
+        public scheduleModel schedule { get; set; }
 
     }
 }

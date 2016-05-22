@@ -3,10 +3,25 @@ namespace CorridorSystem.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initialMigration : DbMigration
+    public partial class newmig : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.eventModel",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        DTEnd = c.DateTime(nullable: false),
+                        DTStart = c.DateTime(nullable: false),
+                        Duration = c.Time(nullable: false, precision: 7),
+                        DTStamp = c.DateTime(nullable: false),
+                        LastModified = c.DateTime(nullable: false),
+                        Summary = c.String(),
+                        Location = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
             CreateTable(
                 "dbo.CorrUser",
                 c => new
@@ -41,6 +56,14 @@ namespace CorridorSystem.Migrations
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         Name = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.scheduleModel",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -120,9 +143,11 @@ namespace CorridorSystem.Migrations
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.scheduleModel");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.RemovedUsers");
             DropTable("dbo.CorrUser");
+            DropTable("dbo.eventModel");
         }
     }
 }
