@@ -55,6 +55,22 @@ namespace CorridorSystem.Controllers
             
         }
 
+        [Authorize]
+        [Route("api/User")]
+        public IHttpActionResult Get()
+        {
+            ClaimsIdentity claimsIdentity = (ClaimsIdentity)User.Identity;
+            Claim userClaim = claimsIdentity.FindFirst(ClaimTypes.Name);
+            string myUsername = userClaim.Value;
+            using (var db = new ModelContext())
+            {
+                var myUser = db.MyUsers.Include("schedule").Where(x => x.UserName == myUsername).FirstOrDefault<CorrUser>();
+                
+                return Ok(myUser);
+            }
+        }
+
+
         // POST: api/User
         public void Post([FromBody]string value)
         {

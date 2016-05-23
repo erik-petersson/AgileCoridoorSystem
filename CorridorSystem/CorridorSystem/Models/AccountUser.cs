@@ -26,6 +26,9 @@ namespace CorridorSystem.Models
         [Required]
         public int UserType { get; set; }
 
+        [Required]
+        public string Signature { get; set; }
+
 
         [Required]
         public string Email { get; set; }

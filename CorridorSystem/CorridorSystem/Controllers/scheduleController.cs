@@ -27,7 +27,7 @@ namespace CorridorSystem.Controllers
         [ResponseType(typeof(scheduleModel))]
         public IHttpActionResult GetscheduleModel(int id)
         {
-            scheduleModel scheduleModel = db.schedule.Find(id);
+            scheduleModel scheduleModel = db.schedule.Include("events").Where(x => x.Id == id).FirstOrDefault<scheduleModel>();
             if (scheduleModel == null)
             {
                 return NotFound();
