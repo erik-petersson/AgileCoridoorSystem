@@ -18,6 +18,8 @@ namespace CorridorSystem.Models.DAL
 
         public DbSet<CorrUser> MyUsers { get; set; }
         public DbSet<RemovedUsers> RmUsers { get; set; }
+        public DbSet<scheduleModel> schedule { get; set; }
+        public DbSet<eventModel> events { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

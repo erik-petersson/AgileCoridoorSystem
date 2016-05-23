@@ -348,6 +348,7 @@ namespace CorridorSystem.Controllers
                     newUser.LastName = model.LastName;
                     newUser.Title = model.Title;
                     newUser.Email = model.Email;
+                    newUser.schedule = new scheduleModel("ScMa");
 
                     db.MyUsers.Add(newUser);
                     db.SaveChanges();

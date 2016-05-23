@@ -40,6 +40,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DDay.iCal, Version=1.0.2.575, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DDay.iCal.1.0.2.575\lib\DDay.iCal.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -193,15 +197,33 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\scheduleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201604261203581_initialMigration.cs" />
-    <Compile Include="Migrations\201604261203581_initialMigration.Designer.cs">
-      <DependentUpon>201604261203581_initialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201605221550129_newmig.cs" />
+    <Compile Include="Migrations\201605221550129_newmig.Designer.cs">
+      <DependentUpon>201605221550129_newmig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605221554072_newmigagain.cs" />
+    <Compile Include="Migrations\201605221554072_newmigagain.Designer.cs">
+      <DependentUpon>201605221554072_newmigagain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605221555373_newmig3.cs" />
+    <Compile Include="Migrations\201605221555373_newmig3.Designer.cs">
+      <DependentUpon>201605221555373_newmig3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605221625208_newmig4.cs" />
+    <Compile Include="Migrations\201605221625208_newmig4.Designer.cs">
+      <DependentUpon>201605221625208_newmig4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605221725030_newmig5.cs" />
+    <Compile Include="Migrations\201605221725030_newmig5.Designer.cs">
+      <DependentUpon>201605221725030_newmig5.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -210,8 +232,10 @@
     <Compile Include="AuthRepository.cs" />
     <Compile Include="Models\DAL\ModelContext.cs" />
     <Compile Include="Models\DAL\UserInitializer.cs" />
+    <Compile Include="Models\eventModel.cs" />
     <Compile Include="Models\RemovedUsers.cs" />
     <Compile Include="Models\CorrUser.cs" />
+    <Compile Include="Models\scheduleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
@@ -270,6 +294,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Schedule\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -279,8 +304,20 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604261203581_initialMigration.resx">
-      <DependentUpon>201604261203581_initialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605221550129_newmig.resx">
+      <DependentUpon>201605221550129_newmig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605221554072_newmigagain.resx">
+      <DependentUpon>201605221554072_newmigagain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605221555373_newmig3.resx">
+      <DependentUpon>201605221555373_newmig3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605221625208_newmig4.resx">
+      <DependentUpon>201605221625208_newmig4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605221725030_newmig5.resx">
+      <DependentUpon>201605221725030_newmig5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
