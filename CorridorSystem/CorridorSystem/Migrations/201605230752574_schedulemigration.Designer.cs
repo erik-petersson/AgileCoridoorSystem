@@ -7,13 +7,13 @@ namespace CorridorSystem.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class newmig : IMigrationMetadata
+    public sealed partial class schedulemigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(newmig));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(schedulemigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201605221550129_newmig"; }
+            get { return "201605230752574_schedulemigration"; }
         }
         
         string IMigrationMetadata.Source

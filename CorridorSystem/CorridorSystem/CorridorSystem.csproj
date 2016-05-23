@@ -205,25 +205,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201605221550129_newmig.cs" />
-    <Compile Include="Migrations\201605221550129_newmig.Designer.cs">
-      <DependentUpon>201605221550129_newmig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605221554072_newmigagain.cs" />
-    <Compile Include="Migrations\201605221554072_newmigagain.Designer.cs">
-      <DependentUpon>201605221554072_newmigagain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605221555373_newmig3.cs" />
-    <Compile Include="Migrations\201605221555373_newmig3.Designer.cs">
-      <DependentUpon>201605221555373_newmig3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605221625208_newmig4.cs" />
-    <Compile Include="Migrations\201605221625208_newmig4.Designer.cs">
-      <DependentUpon>201605221625208_newmig4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605221725030_newmig5.cs" />
-    <Compile Include="Migrations\201605221725030_newmig5.Designer.cs">
-      <DependentUpon>201605221725030_newmig5.cs</DependentUpon>
+    <Compile Include="Migrations\201605230752574_schedulemigration.cs" />
+    <Compile Include="Migrations\201605230752574_schedulemigration.Designer.cs">
+      <DependentUpon>201605230752574_schedulemigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -304,20 +288,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605221550129_newmig.resx">
-      <DependentUpon>201605221550129_newmig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605221554072_newmigagain.resx">
-      <DependentUpon>201605221554072_newmigagain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605221555373_newmig3.resx">
-      <DependentUpon>201605221555373_newmig3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605221625208_newmig4.resx">
-      <DependentUpon>201605221625208_newmig4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605221725030_newmig5.resx">
-      <DependentUpon>201605221725030_newmig5.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605230752574_schedulemigration.resx">
+      <DependentUpon>201605230752574_schedulemigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

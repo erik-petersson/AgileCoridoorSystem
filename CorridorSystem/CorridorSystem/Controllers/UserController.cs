@@ -64,17 +64,17 @@ namespace CorridorSystem.Controllers
         // PUT: api/User/{uId}
         [Authorize]
         [Route("api/Users/{uId}")]
-        public IHttpActionResult Put([FromBody]User newUserValues, int uId)
+        public IHttpActionResult Put([FromBody]CorrUser newUserValues, int uId)
         {
             using(var db = new ModelContext())
             {
                 var userToUpdate = db.MyUsers.Where(x => x.Id == uId).FirstOrDefault<CorrUser>();
                 Dictionary<string, string> u = new Dictionary<string, string>();
-                u.Add("UserName", newUserValues.username);
-                u.Add("FirstName", newUserValues.firstname);
-                u.Add("LastName", newUserValues.lastname);
-                u.Add("Email", newUserValues.email);
-                u.Add("Title", newUserValues.title);
+                u.Add("UserName", newUserValues.UserName);
+                u.Add("FirstName", newUserValues.FirstName);
+                u.Add("LastName", newUserValues.LastName);
+                u.Add("Email", newUserValues.Email);
+                u.Add("Title", newUserValues.Title);
                 foreach (var value in u)
                 {
                     if (value.Value != null)
