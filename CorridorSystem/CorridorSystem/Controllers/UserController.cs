@@ -18,7 +18,7 @@ namespace CorridorSystem.Controllers
         // Get a specific user by userId
         // GET: api/User/userId
         [Authorize]
-        //[Route("api/User/{uId}")]
+        [Route("api/User/{uId}")]
         public IHttpActionResult Get(int uId)
         {
             ClaimsIdentity claimsIdentity = (ClaimsIdentity)User.Identity;
@@ -40,7 +40,7 @@ namespace CorridorSystem.Controllers
 
         //returns all users of that type
         // GET: api/Users/{type}
-        //[Route("api/Users/{uType}")]
+        [Route("api/Users/{uType}")]
         public IHttpActionResult Get1(int uType)
         {
             using (var db = new ModelContext())
@@ -53,7 +53,7 @@ namespace CorridorSystem.Controllers
         }
 
         [Authorize]
-        //[Route("api/User")]
+        [Route("api/User")]
         public IHttpActionResult Get()
         {
             ClaimsIdentity claimsIdentity = (ClaimsIdentity)User.Identity;
