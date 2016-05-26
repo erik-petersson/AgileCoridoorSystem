@@ -37,7 +37,6 @@ namespace CorridorSystem.Models
 
             foreach (Event ev in cal[0].Events)
             {
-                events = new List<eventModel>();
                 if (events.FirstOrDefault(e => e.externalId == ev.UID) == null)
                 {
                     eventModel e = new eventModel(ev);

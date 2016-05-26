@@ -27,6 +27,7 @@ namespace CorridorSystem.Controllers
         public void GetUpdateSchedule(int update)
         {
             db.schedule.Include("events").FirstOrDefault(s => s.Id == update).updateSchedule();
+            db.SaveChanges();
         }
 
         // GET: api/schedule/5

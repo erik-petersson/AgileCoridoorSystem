@@ -56,7 +56,7 @@ namespace CorridorSystem.Models
             }
             if (!hasBeenChanged)
             {
-                status = "Not Available";
+                status = "Busy";
             }
         }
 
