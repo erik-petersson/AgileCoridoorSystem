@@ -58,6 +58,7 @@ namespace CorridorSystem.Models
             {
                 status = "Busy";
             }
+            db.SaveChanges();
         }
 
     }
