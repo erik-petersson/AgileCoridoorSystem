@@ -29,6 +29,7 @@ namespace CorridorSystem.Controllers
                 CorrUser matchingUser = db.MyUsers.Where(x => x.Id == uId).FirstOrDefault<CorrUser>();
                 if (matchingUser.Id == uId)
                 {
+                    matchingUser.updateStatus(db);
                     return Ok(matchingUser);
                 }
                 else
@@ -46,6 +47,8 @@ namespace CorridorSystem.Controllers
             using (var db = new ModelContext())
             {
                 List<CorrUser> allUsers = db.MyUsers.Include("schedule").Where(x => x.UserType == uType).ToList();
+                foreach (CorrUser user in allUsers)
+                    user.updateStatus(db);
                 return Ok(allUsers);
             }
             
@@ -62,7 +65,7 @@ namespace CorridorSystem.Controllers
             using (var db = new ModelContext())
             {
                 var myUser = db.MyUsers.Include("schedule").Where(x => x.UserName == myUsername).FirstOrDefault<CorrUser>();
-                
+                myUser.updateStatus(db);
                 return Ok(myUser);
             }
         }

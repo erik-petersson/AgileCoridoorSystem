@@ -3,7 +3,7 @@ namespace CorridorSystem.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class migg : DbMigration
     {
         public override void Up()
         {
@@ -20,6 +20,7 @@ namespace CorridorSystem.Migrations
                         Summary = c.String(),
                         Location = c.String(),
                         externalId = c.String(),
+                        status = c.String(),
                         scheduleModel_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
@@ -38,6 +39,7 @@ namespace CorridorSystem.Migrations
                         FirstName = c.String(nullable: false),
                         LastName = c.String(nullable: false),
                         signature = c.String(nullable: false),
+                        status = c.String(),
                         schedule_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
