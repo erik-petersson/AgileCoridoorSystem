@@ -40,7 +40,7 @@ namespace CorridorSystem.Controllers
 
         //returns all users of that type
         // GET: api/Users/{type}
-       // [Route("api/Users/{uType}")]
+        //[Route("api/Users/{uType}")]
         public IHttpActionResult Get1(int uType)
         {
             using (var db = new ModelContext())
