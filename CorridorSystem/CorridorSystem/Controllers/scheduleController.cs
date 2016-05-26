@@ -23,6 +23,12 @@ namespace CorridorSystem.Controllers
             return db.schedule.Include("events");
         }
 
+        // GET: api/schedule?update=5
+        public void GetUpdateSchedule(int update)
+        {
+            db.schedule.Include("events").FirstOrDefault(s => s.Id == update).updateSchedule();
+        }
+
         // GET: api/schedule/5
         [ResponseType(typeof(scheduleModel))]
         public IHttpActionResult GetscheduleModel(int id)

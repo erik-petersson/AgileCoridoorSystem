@@ -49,6 +49,7 @@ namespace CorridorSystem.Controllers
                 return Ok(allUsers);
             }
             
+
         }
 
         [Authorize]
