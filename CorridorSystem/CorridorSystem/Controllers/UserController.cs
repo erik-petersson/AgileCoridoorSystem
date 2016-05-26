@@ -40,16 +40,12 @@ namespace CorridorSystem.Controllers
 
         //returns all users of that type
         // GET: api/Users/{type}
-        [Authorize]
         [Route("api/Users/{uType}")]
         public IHttpActionResult Get1(int uType)
         {
-            ClaimsIdentity claimsIdentity = (ClaimsIdentity)User.Identity;
-            Claim userClaim = claimsIdentity.FindFirst(ClaimTypes.Name);
-            string myUsername = userClaim.Value;
             using (var db = new ModelContext())
             {
-                List<CorrUser> allUsers = db.MyUsers.Where(x => x.UserType == uType).ToList();
+                List<CorrUser> allUsers = db.MyUsers.Include("schedule").Where(x => x.UserType == uType).ToList();
                 return Ok(allUsers);
             }
             
