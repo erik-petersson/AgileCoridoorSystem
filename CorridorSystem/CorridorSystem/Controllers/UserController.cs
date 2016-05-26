@@ -51,8 +51,23 @@ namespace CorridorSystem.Controllers
                     user.updateStatus(db);
                 return Ok(allUsers);
             }
-            
-
+        }
+        [Route("api/Users")]
+        public IHttpActionResult Get2()
+        {
+            using (var db = new ModelContext())
+            {
+                List<int> alltypes = new List<int>();
+                List<CorrUser> allUsers = db.MyUsers.ToList();
+                foreach (CorrUser user in allUsers)
+                {
+                    if (!alltypes.Contains(user.UserType))
+                    {
+                        alltypes.Add(user.UserType);
+                    }
+                }
+                return Ok(alltypes);
+            }
         }
 
         [Authorize]
