@@ -1,4 +1,5 @@
-﻿using DDay.iCal;
+﻿using CorridorSystem.Models.DAL;
+using DDay.iCal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -36,8 +37,14 @@ namespace CorridorSystem.Models
 
             foreach (Event ev in cal[0].Events)
             {
+                events = new List<eventModel>();
                 if (events.FirstOrDefault(e => e.externalId == ev.UID) == null)
-                    events.Add(new eventModel(ev));
+                {
+                    eventModel e = new eventModel(ev);
+                    e.status = "Away";
+                    events.Add(e);
+                }
+                
             }
 
         }

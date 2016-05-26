@@ -6,6 +6,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Infrastructure;
 using Microsoft.AspNet.Identity.EntityFramework;
+using CorridorSystem.Models.DAL;
 
 namespace CorridorSystem.Models
 {
@@ -38,8 +39,26 @@ namespace CorridorSystem.Models
         public string LastName { get; set; }
         [Required]
         public string signature { get; set; }
-
+        public string status { get; set; }
         public scheduleModel schedule { get; set; }
+        public void updateStatus(ModelContext db)
+        {
+            
+            bool hasBeenChanged = false;
+            DateTime now = DateTime.Now;
+            foreach(eventModel eve in db.schedule.Include("events").FirstOrDefault(s => s.Id == schedule.Id).events)
+            {
+                if(eve.DTStart < now && eve.DTEnd > now)
+                {
+                    status = eve.status;
+                    hasBeenChanged = true;
+                }
+            }
+            if (!hasBeenChanged)
+            {
+                status = "Not Available";
+            }
+        }
 
     }
 }

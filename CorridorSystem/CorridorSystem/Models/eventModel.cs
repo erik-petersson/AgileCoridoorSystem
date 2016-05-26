@@ -20,7 +20,7 @@ namespace CorridorSystem.Models
         public string Summary { get; set; }
         public string Location { get; set; }
         public string externalId { get; set; }
-
+        public string status { get; set; }
         public eventModel() { }
 
         public eventModel(Event eve)
