@@ -10,6 +10,9 @@ using CorridorSystem.Models;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
+using System.Net.Mail;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CorridorSystem.Controllers
 {
@@ -97,7 +100,7 @@ namespace CorridorSystem.Controllers
         [Route("api/Users/{uId}")]
         public IHttpActionResult Put([FromBody]CorrUser newUserValues, int uId)
         {
-            using(var db = new ModelContext())
+            using (var db = new ModelContext())
             {
                 var userToUpdate = db.MyUsers.Where(x => x.Id == uId).FirstOrDefault<CorrUser>();
                 Dictionary<string, string> u = new Dictionary<string, string>();
@@ -119,10 +122,10 @@ namespace CorridorSystem.Controllers
                     }
                 }
 
-                db.MyUsers.AddOrUpdate(userToUpdate); 
+                db.MyUsers.AddOrUpdate(userToUpdate);
                 db.SaveChanges();
                 return Ok();
-            }       
+            }
         }
 
         // Deactivate a user
@@ -136,7 +139,8 @@ namespace CorridorSystem.Controllers
                 var userToDeactivate = db.MyUsers.Where(x => x.Id == uId).FirstOrDefault<CorrUser>();
                 RemovedUsers rmUser = new RemovedUsers();
 
-                foreach (var value in userToDeactivate.GetType().GetProperties()){
+                foreach (var value in userToDeactivate.GetType().GetProperties())
+                {
 
                     var newValue = value.GetValue(userToDeactivate, null);
 
@@ -148,9 +152,42 @@ namespace CorridorSystem.Controllers
                 db.MyUsers.AddOrUpdate();
                 db.SaveChanges();
                 return Ok();
-                
+
             }
 
+        }
+
+        //POST api/Users/{uId}/Mail
+        [Route("api/Users/{uId}/Mail")]
+        public async Task<IHttpActionResult> PostSendMail(int uId, PostSendMailModel request)
+        {
+            try
+            {
+                using (ModelContext db = new ModelContext())
+                {
+                    CorrUser user = db.MyUsers.FirstOrDefault(u => u.Id == uId);
+
+                    MailMessage message = new MailMessage("corridor@rudbeck.nu", user.Email);
+                    message.Subject = request.Subject;
+                    message.Body = request.StudentName + " " + request.Content;
+
+                    var client = new SmtpClient("mail.rudbeck.nu", 25);
+                    client.Credentials = new NetworkCredential()
+                    {
+                        UserName = "corridor@rudbeck.nu",
+                        Password = "pelle123"
+                    };
+
+                    client.Send(message);
+                    message.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok();
         }
     }
 }

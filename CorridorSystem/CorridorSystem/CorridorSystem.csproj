@@ -217,6 +217,7 @@
     <Compile Include="Models\DAL\ModelContext.cs" />
     <Compile Include="Models\DAL\UserInitializer.cs" />
     <Compile Include="Models\eventModel.cs" />
+    <Compile Include="Models\PostSendMailModel.cs" />
     <Compile Include="Models\RemovedUsers.cs" />
     <Compile Include="Models\CorrUser.cs" />
     <Compile Include="Models\scheduleModel.cs" />
