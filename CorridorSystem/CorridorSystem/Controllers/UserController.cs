@@ -159,7 +159,7 @@ namespace CorridorSystem.Controllers
 
         //POST api/Users/{uId}/Mail
         [Route("api/Users/{uId}/Mail")]
-        public async Task<IHttpActionResult> PostSendMail(int uId, PostSendMailModel request)
+        public IHttpActionResult PostSendMail([FromBody]PostSendMailModel request, int uId)
         {
             try
             {
