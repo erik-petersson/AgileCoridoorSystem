@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using CorridorSystem.Models;
 using CorridorSystem.Models.DAL;
+using System.Security.Claims;
 
 namespace CorridorSystem.Controllers
 {
@@ -80,7 +81,22 @@ namespace CorridorSystem.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.events.Add(eventModel);
+            ClaimsIdentity claimsIdentity = (ClaimsIdentity)User.Identity;
+            Claim userClaim = claimsIdentity.FindFirst(ClaimTypes.Name);
+            string myUsername = userClaim.Value;
+
+            var user = db.MyUsers.Include(u => u.schedule.events).FirstOrDefault(u => u.UserName == myUsername);
+
+            if (user.schedule.events == null)
+            {
+                user.schedule.events = new List<eventModel>();
+            }
+
+            eventModel.DTStamp = DateTime.Now;
+            eventModel.LastModified = DateTime.Now;
+            user.schedule.events.Add(eventModel);
+
+            // db.events.Add(eventModel);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = eventModel.Id }, eventModel);
